@@ -4,6 +4,8 @@ package com.yong.kakaocoupon.coupon.entity;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,6 +24,7 @@ public class Coupon {
 	private LocalDateTime usableFrom;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime usableUntil;
+	@Enumerated(EnumType.STRING)
 	private CouponStatus status;
 
 	public CouponResult use(int amount) {

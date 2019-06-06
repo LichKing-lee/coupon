@@ -1,6 +1,12 @@
 package com.yong.kakaocoupon;
 
+import static java.util.stream.Collectors.*;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -45,15 +51,8 @@ public class KakaoCouponApplication {
 	}
 
 	private String getJson(ClassPathResource classPathResource) throws IOException {
-		Path path = Paths.get(classPathResource.getURI());
-
-		try(FileChannel fileChannel = FileChannel.open(path, StandardOpenOption.READ)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) Files.size(path));
-			fileChannel.read(byteBuffer);
-
-			byteBuffer.flip();
-
-			return Charset.defaultCharset().decode(byteBuffer).toString();
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(classPathResource.getInputStream()))) {
+			return reader.lines().collect(joining());
 		}
 	}
 }

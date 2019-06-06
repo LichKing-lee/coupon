@@ -47,6 +47,15 @@ class CouponControllerIntegrateTest {
 	}
 
 	@Test
+	void 사용할수없는_쿠폰_사용시_400_응답() throws Exception {
+		mockMvc.perform(post("/coupons/{couponId}", 1004)
+			.param("amount", "50000")
+			.param("dateTime", "2019-06-06 14:54:00"))
+			.andDo(print())
+			.andExpect(status().isBadRequest());
+	}
+
+	@Test
 	@Transactional
 	void 쿠폰_사용() throws Exception {
 		mockMvc.perform(post("/coupons/{couponId}", 1001)

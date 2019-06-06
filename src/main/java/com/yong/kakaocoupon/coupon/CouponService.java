@@ -15,6 +15,7 @@ import com.yong.kakaocoupon.coupon.dto.CouponResult;
 import com.yong.kakaocoupon.coupon.entity.Coupon;
 import com.yong.kakaocoupon.coupon.enumclass.CouponStatus;
 import com.yong.kakaocoupon.coupon.exception.CouponNotFoundException;
+import com.yong.kakaocoupon.coupon.exception.CouponUnusableException;
 import com.yong.kakaocoupon.coupon.validate.ValidateCondition;
 import com.yong.kakaocoupon.coupon.validate.ValidateContainer;
 import lombok.AllArgsConstructor;
@@ -38,8 +39,11 @@ public class CouponService {
 	@Transactional
 	public CouponResult use(Integer couponId, int amount, LocalDateTime dateTime) {
 		Coupon coupon = couponRepository.findById(couponId)
-			.filter(c -> validateContainer.validate(c, new ValidateCondition(amount, dateTime)))
-			.orElseThrow(() -> new CouponNotFoundException("Not found usable coupon :: " + couponId));
+			.orElseThrow(() -> new CouponNotFoundException("Not found coupon :: " + couponId));
+
+		if(!validateContainer.validate(coupon, new ValidateCondition(amount, dateTime))) {
+			throw new CouponUnusableException("Unusable coupon :: " + couponId);
+		}
 
 		CouponResult result = coupon.use(amount);
 

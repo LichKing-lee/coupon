@@ -10,7 +10,6 @@ java -jar build/libs/kakao-coupon-0.0.1-SNAPSHOT.jar
 - JPA
 - H2DB
 - Junit 5
-- spring restdocs
 
 # Schema
 - table name: coupon

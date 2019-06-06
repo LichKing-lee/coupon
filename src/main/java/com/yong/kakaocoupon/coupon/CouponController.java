@@ -3,6 +3,7 @@ package com.yong.kakaocoupon.coupon;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,14 @@ public class CouponController {
 	private CouponService couponService;
 
 	@GetMapping("/coupons")
-	public List<Coupon> test(
+	public List<Coupon> coupons(
 		@RequestParam int amount,
-		@RequestParam(required = false) LocalDateTime dateTime) {
-		return couponService.getUsableSortedCoupons();
+		@RequestParam(required = false)
+		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime dateTime) {
+		return couponService.getUsableSortedCoupons(amount, ifNullNow(dateTime));
+	}
+
+	private LocalDateTime ifNullNow(LocalDateTime dateTime) {
+		return dateTime == null ? LocalDateTime.now() : dateTime;
 	}
 }

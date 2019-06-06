@@ -19,14 +19,18 @@ class CouponControllerIntegrateTest {
 	@Test
 	void 쿠폰목록조회_만료일시가_가까운순_같으면_할인금액이_큰순() throws Exception {
 		mockMvc.perform(get("/coupons")
-			.param("amount", "500"))
+			.param("amount", "50000")
+			.param("dateTime", "2019-06-06 14:54:00"))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$").isArray())
 			.andExpect(jsonPath("$[0].id").value(1001))
+			.andExpect(jsonPath("$[0].status").value("NORMAL"))
 			.andExpect(jsonPath("$[1].id").value(1003))
+			.andExpect(jsonPath("$[1].status").value("NORMAL"))
 			.andExpect(jsonPath("$[2].id").value(1002))
+			.andExpect(jsonPath("$[2].status").value("NORMAL"))
 			.andExpect(jsonPath("$[3].id").value(1005))
-			.andExpect(jsonPath("$[4].id").value(1006));
+			.andExpect(jsonPath("$[3].status").value("NORMAL"));
 	}
 }

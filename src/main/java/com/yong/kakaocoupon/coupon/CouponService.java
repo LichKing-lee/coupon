@@ -7,8 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
+import com.yong.kakaocoupon.coupon.dto.CouponResult;
 import com.yong.kakaocoupon.coupon.entity.Coupon;
 import com.yong.kakaocoupon.coupon.enumclass.CouponStatus;
 import com.yong.kakaocoupon.coupon.exception.CouponNotFoundException;
@@ -26,15 +29,22 @@ public class CouponService {
 	private ValidateContainer validateContainer;
 
 	public List<Coupon> getUsableSortedCoupons(int amount, LocalDateTime dateTime) {
-		return couponRepository.findAllByStatus(CouponStatus.NORMAL).stream()
+		return couponRepository.findAll().stream()
 			.filter(c -> validateContainer.validate(c, new ValidateCondition(amount, dateTime)))
 			.sorted(COUPON_COMPARATOR)
 			.collect(toList());
 	}
 
-	public Coupon use(Integer couponId, int amount, LocalDateTime dateTime) {
-		return couponRepository.findById(couponId)
+	@Transactional
+	public CouponResult use(Integer couponId, int amount, LocalDateTime dateTime) {
+		Coupon coupon = couponRepository.findById(couponId)
 			.filter(c -> validateContainer.validate(c, new ValidateCondition(amount, dateTime)))
 			.orElseThrow(() -> new CouponNotFoundException("Not found usable coupon :: " + couponId));
+
+		CouponResult result = coupon.use(amount);
+
+		couponRepository.save(coupon);
+
+		return result;
 	}
 }

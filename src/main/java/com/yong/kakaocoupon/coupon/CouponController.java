@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yong.kakaocoupon.coupon.dto.CouponResult;
 import com.yong.kakaocoupon.coupon.entity.Coupon;
 import com.yong.kakaocoupon.coupon.exception.CouponException;
 import lombok.AllArgsConstructor;
@@ -31,12 +32,12 @@ public class CouponController {
 	}
 
 	@PostMapping("/coupons/{couponId}")
-	public void use(
+	public CouponResult use(
 		@PathVariable Integer couponId,
 		@RequestParam int amount,
 		@RequestParam(required = false)
 		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime dateTime) {
-		couponService.use(couponId, amount, ifNullNow(dateTime));
+		return couponService.use(couponId, amount, ifNullNow(dateTime));
 	}
 
 	private LocalDateTime ifNullNow(LocalDateTime dateTime) {

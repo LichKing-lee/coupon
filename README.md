@@ -2,6 +2,9 @@
 ```
 ./gradlew clean build
 java -jar build/libs/kakao-coupon-0.0.1-SNAPSHOT.jar
+
+curl -X GET http://localhost:8070/coupons?amount=50000
+curl -X POST http://localhost:8070/coupons/1001?amount=50000
 ```
 
 # Tech stack

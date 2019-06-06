@@ -7,9 +7,7 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yong.kakaocoupon.coupon.enumclass.CouponStatus;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.ToString;
 
 @Data
 @Entity

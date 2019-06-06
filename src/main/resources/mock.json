@@ -4,7 +4,7 @@
     "useMinAmount": 5000,
     "discountAmount": 3000,
     "usableFrom": "2019-01-01 00:00:00",
-    "usableUntil": "2019-06-31 23:59:59",
+    "usableUntil": "2019-06-30 23:59:59",
     "status": "NORMAL"
   },
   {
@@ -20,7 +20,7 @@
     "useMinAmount": 0,
     "discountAmount": 1000,
     "usableFrom": "2019-01-01 00:00:00",
-    "usableUntil": "2019-06-31 23:59:59",
+    "usableUntil": "2019-06-30 23:59:59",
     "status": "NORMAL"
   },
   {

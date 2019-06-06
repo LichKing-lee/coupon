@@ -29,12 +29,20 @@ class CouponControllerIntegrateTest {
 			.andExpect(jsonPath("$.length()").value(4))
 			.andExpect(jsonPath("$[0].id").value(1001))
 			.andExpect(jsonPath("$[0].status").value("NORMAL"))
+			.andExpect(jsonPath("$[0].usableUntil").value("2019-06-30 23:59:59"))
+			.andExpect(jsonPath("$[0].discountAmount").value(3000))
 			.andExpect(jsonPath("$[1].id").value(1003))
 			.andExpect(jsonPath("$[1].status").value("NORMAL"))
+			.andExpect(jsonPath("$[1].usableUntil").value("2019-06-30 23:59:59"))
+			.andExpect(jsonPath("$[1].discountAmount").value(1000))
 			.andExpect(jsonPath("$[2].id").value(1002))
 			.andExpect(jsonPath("$[2].status").value("NORMAL"))
+			.andExpect(jsonPath("$[2].usableUntil").value("2019-07-31 23:59:59"))
+			.andExpect(jsonPath("$[2].discountAmount").value(5000))
 			.andExpect(jsonPath("$[3].id").value(1005))
-			.andExpect(jsonPath("$[3].status").value("NORMAL"));
+			.andExpect(jsonPath("$[3].status").value("NORMAL"))
+			.andExpect(jsonPath("$[3].usableUntil").value("2019-07-31 23:59:59"))
+			.andExpect(jsonPath("$[3].discountAmount").value(2000));
 	}
 
 	@Test

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1001,
+    "useMinAmount": 5000,
+    "discountAmount": 3000,
+    "usableFrom": "2019-01-01 00:00:00",
+    "usableUntil": "2019-06-31 23:59:59",
+    "status": "NORMAL"
+  },
+  {
+    "id": 1002,
+    "useMinAmount": 5000,
+    "discountAmount": 5000,
+    "usableFrom": "2019-01-01 00:00:00",
+    "usableUntil": "2019-07-31 23:59:59",
+    "status": "NORMAL"
+  },
+  {
+    "id": 1003,
+    "useMinAmount": 0,
+    "discountAmount": 1000,
+    "usableFrom": "2019-01-01 00:00:00",
+    "usableUntil": "2019-06-31 23:59:59",
+    "status": "NORMAL"
+  },
+  {
+    "id": 1004,
+    "useMinAmount": 0,
+    "discountAmount": 1000,
+    "usableFrom": "2019-01-01 00:00:00",
+    "usableUntil": "2019-03-31 23:59:59",
+    "status": "USED"
+  },
+  {
+    "id": 1005,
+    "useMinAmount": 0,
+    "discountAmount": 2000,
+    "usableFrom": "2019-01-01 00:00:00",
+    "usableUntil": "2019-07-31 23:59:59",
+    "status": "NORMAL"
+  },
+  {
+    "id": 1006,
+    "useMinAmount": 3000,
+    "discountAmount": 5000,
+    "usableFrom": "2019-07-01 00:00:00",
+    "usableUntil": "2019-10-31 23:59:59",
+    "status": "NORMAL"
+  }
+]

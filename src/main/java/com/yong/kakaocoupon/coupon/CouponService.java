@@ -5,11 +5,13 @@ import static java.util.stream.Collectors.*;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.yong.kakaocoupon.coupon.entity.Coupon;
 import com.yong.kakaocoupon.coupon.enumclass.CouponStatus;
+import com.yong.kakaocoupon.coupon.exception.CouponNotFoundException;
 import com.yong.kakaocoupon.coupon.validate.ValidateCondition;
 import com.yong.kakaocoupon.coupon.validate.ValidateContainer;
 import lombok.AllArgsConstructor;
@@ -28,5 +30,11 @@ public class CouponService {
 			.filter(c -> validateContainer.validate(c, new ValidateCondition(amount, dateTime)))
 			.sorted(COUPON_COMPARATOR)
 			.collect(toList());
+	}
+
+	public Coupon use(Integer couponId, int amount, LocalDateTime dateTime) {
+		return couponRepository.findById(couponId)
+			.filter(c -> validateContainer.validate(c, new ValidateCondition(amount, dateTime)))
+			.orElseThrow(() -> new CouponNotFoundException("Not found usable coupon :: " + couponId));
 	}
 }

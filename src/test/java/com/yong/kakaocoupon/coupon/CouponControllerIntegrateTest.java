@@ -33,4 +33,13 @@ class CouponControllerIntegrateTest {
 			.andExpect(jsonPath("$[3].id").value(1005))
 			.andExpect(jsonPath("$[3].status").value("NORMAL"));
 	}
+
+	@Test
+	void 존재하지않는쿠폰_요청시_400_응답() throws Exception {
+		mockMvc.perform(post("/coupons/10")
+			.param("amount", "50000")
+			.param("dateTime", "2019-06-06 14:54:00"))
+			.andDo(print())
+			.andExpect(status().isBadRequest());
+	}
 }

@@ -17,11 +17,11 @@ public class KakaoCouponApplicationTests {
 	private CouponRepository couponRepository;
 
 	@Test
-	public void contextLoads() {
+	void contextLoads() {
 	}
 
 	@Test
-	public void initialize_success() {
+	void initialize_success() {
 		List<Coupon> coupons = couponRepository.findAll();
 
 		assertThat(coupons.size()).isEqualTo(6);

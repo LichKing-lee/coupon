@@ -27,7 +27,7 @@ class CouponServiceUnitTest {
 		given(couponRepository.findAll())
 			.willReturn(Arrays.asList(mockCouponDay(1,6), mockCouponDay(2,5), mockCouponDay(3,7)));
 
-		List<Coupon> coupons = couponService.getSortedCoupons();
+		List<Coupon> coupons = couponService.getUsableSortedCoupons();
 
 		assertThat(coupons.get(0).getId()).isEqualTo(2);
 		assertThat(coupons.get(1).getId()).isEqualTo(1);
@@ -39,7 +39,7 @@ class CouponServiceUnitTest {
 		given(couponRepository.findAll())
 			.willReturn(Arrays.asList(mockCouponDiscountAmount(1,500), mockCouponDiscountAmount(2,5000), mockCouponDiscountAmount(3,700)));
 
-		List<Coupon> coupons = couponService.getSortedCoupons();
+		List<Coupon> coupons = couponService.getUsableSortedCoupons();
 
 		assertThat(coupons.get(0).getId()).isEqualTo(2);
 		assertThat(coupons.get(1).getId()).isEqualTo(3);

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.yong.kakaocoupon.coupon.entity.Coupon;
+import com.yong.kakaocoupon.coupon.enumclass.CouponStatus;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -15,8 +16,8 @@ import lombok.AllArgsConstructor;
 public class CouponService {
 	private CouponRepository couponRepository;
 
-	public List<Coupon> getSortedCoupons() {
-		return couponRepository.findAll().stream()
+	public List<Coupon> getUsableSortedCoupons() {
+		return couponRepository.findAllByStatus(CouponStatus.NORMAL).stream()
 			.sorted(Comparator.comparing(Coupon::getUsableUntil).thenComparing(
 				Comparator.comparing(Coupon::getDiscountAmount).reversed()))
 			.collect(toList());
